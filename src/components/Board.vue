@@ -4,11 +4,12 @@
             my Trello
         </header>
         <main>
-            <p class="info-line">All: 0 task</p>
+            <p class="info-line">All: {{ totalCardCount }} task</p>
             <div class="list-index">
                 <list v-for="(item, index) in lists"
                     :key="item.id"
                     :title="item.title"
+                    :cards="item.cards"
                     :listIndex="index"
                 />
             <list-add />
@@ -21,6 +22,7 @@
     import ListAdd from './ListAdd.vue'
     import List from './List'
     import { mapState } from 'vuex'
+
     export default {
         components: {
             ListAdd,
@@ -30,6 +32,9 @@
             ...mapState([
                 'lists'
             ]),
+            totalCardCount() {
+                return this.$store.getters.totalCardCount
+            }
         }
     }
 </script>
